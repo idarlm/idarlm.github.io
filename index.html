@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Strikkulator🧶🤓</title>
+		<meta charset="UTF-8" />
+	</head>
+	<body>
+		<style>
+			body {
+				padding: 0;
+				margin: 0;
+
+				background-color: FloralWhite;
+				color: DimGray;
+			}
+			h1, h2, h3, h4, h5 {
+				color: CadetBlue;
+			}
+			#content-root {
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			.fluff {
+				color: cadetblue;
+				background-color: inherit;
+				box-sizing: border-box;
+				width: 100%;
+				padding: 1rem;
+				text-align: center;
+			}
+			main {
+				flex: 1;
+				display:flex;
+				box-sizing: border-box;
+				width: 100%;
+				align-items: start;
+				justify-content: center;
+			}
+
+			article {
+				min-width: 30rem;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				background-color: white;
+				padding: 1rem;
+				border-radius: 1rem;
+				overflow: clip;
+			}
+
+			form {
+				display: flex;
+				flex-direction: column;
+				margin-bottom: 1rem;
+			}
+			form > * {
+				flex: 1;
+			}
+		</style>
+		<div id="content-root">
+			<header class="fluff"><h2>Strikkulator🧶🤓</h2></header>
+			<main>
+				<article>
+					<h2>Felling av masker</h2>
+					<form>
+						<label for="start">Start</label>
+						<input type="text" id="start"/>
+
+						<label for="stop">Stopp</label>
+						<input type="text" id="stop"/>
+					</form>
+					<div id="result">
+						<h3>Rekke A</h3>
+						<p id="instructions-a"></p>
+
+						<h3>Rekke B</h3>
+						<p id="instructions-b"></p>
+					</div>
+				</article>
+			</main>
+			<footer class="fluff">Made by Brødrene Mykløy.</footer>
+		</div>
+
+		<script>
+			// skjul resultat til vi har noe kult å vise
+			document.getElementById('result').setAttribute('hidden', 'hidden');
+
+			let start;
+			let stop;
+
+			const setStart = (s) => {
+				start = s;
+				updateResult();
+			};
+			const setStop = (s) => {
+				stop = s;
+				updateResult();
+			};
+
+			const updateResult = () => {
+				if(!start || !stop) {
+					return;
+				}
+
+				const masksToDrop = start - stop;
+				const steps = Math.floor(stop / masksToDrop);
+
+				const rowB = stop % masksToDrop;
+				const rowA = masksToDrop - rowB;
+				const preDropped = steps * rowA;
+				const tmp4 = (stop - preDropped) / (masksToDrop - rowA);
+
+				document.getElementById('instructions-a').textContent = `Slå sammen 2 masker på hver ${steps} maske, ${rowA} ganger`;
+				document.getElementById('instructions-b').textContent = `Slå sammen 2 masker på hver ${tmp4} maske, ${rowB} ganger`;
+				document.getElementById('result').removeAttribute('hidden');
+			};
+
+			document.getElementById('start').addEventListener('selectionchange', e => setStart(e.srcElement.value));
+			document.getElementById('stop').addEventListener('selectionchange', e => setStop(e.srcElement.value));
+		</script>
+	</body>
+</html>
