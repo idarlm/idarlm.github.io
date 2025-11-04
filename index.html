@@ -6,6 +6,9 @@
 	</head>
 	<body>
 		<style>
+			:root {
+				font-size: 125%;
+			}
 			body {
 				padding: 0;
 				margin: 0;
@@ -38,7 +41,6 @@
 				align-items: start;
 				justify-content: center;
 			}
-
 			article {
 				min-width: 30rem;
 				display: flex;
@@ -49,7 +51,6 @@
 				border-radius: 1rem;
 				overflow: clip;
 			}
-
 			form {
 				display: flex;
 				flex-direction: column;
@@ -58,6 +59,39 @@
 			form > * {
 				flex: 1;
 			}
+			.input {
+				display: flex;
+				margin: 0.25rem 0;
+				column-gap: 0.5em;
+				align-items: center;
+			}
+			.input > label {
+				flex: 10rem;
+			}
+			.input > input {
+				flex: 1;
+				font-size: 0.75em;
+				padding: 0.35rem 0.5rem;
+				border: solid DimGray 1px;
+				border-radius: 0.35em;
+			}
+
+			@media screen and (max-width: 1000px) {
+				:root {
+					font-size: 250%;
+				}
+				body {
+					font-size: 1.2rem;
+				}
+				article {
+					width: 100%;
+					margin: 0 1rem;
+					min-width: unset;
+				}
+				.input > input {
+					border: solid DimGray 2px;
+				}
+			}
 		</style>
 		<div id="content-root">
 			<header class="fluff"><h2>Strikkulator🧶🤓</h2></header>
@@ -65,18 +99,24 @@
 				<article>
 					<h2>Felling av masker</h2>
 					<form>
-						<label for="start">Start</label>
-						<input type="text" id="start"/>
-
-						<label for="stop">Stopp</label>
-						<input type="text" id="stop"/>
+						<div class="input">
+							<label for="start">Start</label>
+							<input type="text" id="start"/>
+						</div>
+						<div class="input">
+							<label for="stop">Stopp</label>
+							<input type="text" id="stop"/>
+						</div>
 					</form>
 					<div id="result">
-						<h3>Rekke A</h3>
-						<p id="instructions-a"></p>
-
-						<h3>Rekke B</h3>
-						<p id="instructions-b"></p>
+						<div>
+							<h3>Rekke A</h3>
+							<p id="instructions-a"></p>
+						</div>
+						<div>
+							<h3>Rekke B</h3>
+							<p id="instructions-b"></p>
+						</div>
 					</div>
 				</article>
 			</main>
@@ -114,6 +154,13 @@
 
 				document.getElementById('instructions-a').textContent = `Slå sammen 2 masker på hver ${steps} maske, ${rowA} ganger`;
 				document.getElementById('instructions-b').textContent = `Slå sammen 2 masker på hver ${tmp4} maske, ${rowB} ganger`;
+
+				if(rowB == 0) {
+					document.getElementById('instructions-b').parentElement.setAttribute('hidden', 'hidden');
+				} else {
+					document.getElementById('instructions-b').parentElement.removeAttribute('hidden');
+				}
+
 				document.getElementById('result').removeAttribute('hidden');
 			};
 
@@ -122,3 +169,4 @@
 		</script>
 	</body>
 </html>
+
