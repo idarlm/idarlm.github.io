@@ -153,8 +153,8 @@
 				const preDropped = steps * rowA;
 				const tmp4 = (stop - preDropped) / (masksToDrop - rowA);
 
-				document.getElementById('instructions-a').textContent = `Slå sammen 2 masker på hver ${steps} maske, ${rowA} ganger`;
-				document.getElementById('instructions-b').textContent = `Slå sammen 2 masker på hver ${tmp4} maske, ${rowB} ganger`;
+				document.getElementById('instructions-a').textContent = `Slå sammen 2 masker på hver ${steps}. maske, ${rowA} ganger`;
+				document.getElementById('instructions-b').textContent = `Slå sammen 2 masker på hver ${tmp4}. maske, ${rowB} ganger`;
 
 				if(rowB == 0) {
 					document.getElementById('instructions-b').parentElement.setAttribute('hidden', 'hidden');
